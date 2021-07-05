@@ -1,0 +1,40 @@
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <hr class="mt-0 mb-4">
+            <h2>Tambah Artikel</h2>
+            <form method="POST" enctype="multipart/form-data">
+  
+                <!-- Security token -->
+                {% csrf_token %}
+              
+                <!-- Using the formset -->
+                {{ form.as_p }}
+                  
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}

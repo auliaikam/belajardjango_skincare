@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>
+          {% block title %} 
+          {{ data.title }} 
+            {% if data.available %}
+              <span class="badge badge-success">Ada</span>
+            {% else %}
+              <aspan class="btn btn-outline-secondary">Tidak Tersedia</span>
+            {% endif %}
+          {% endblock title %}
+        </h1>
+        {% if user.is_authenticated %}
+          <form action="" method="POST">
+            {% if data.available %} 
+              {% csrf_token %}
+              {{form.waktu}}
+              <a href="{% url 'pesan_category' data.id  %}" type="submit" class="btn btn-success">Pesan</a>
+            {% else %}
+              <a href="{% url 'batalpesan_category' data.id  %}" type="submit" class="btn btn-primary">Batal</a>
+            {% endif %}
+          </form>
+        {% endif %}
+        
+        <p class=" text-muted">{{ data.created_on }}</p>
+        <p class="card-text ">{{ data.content | safe }}</p>
+      </div>
+    </div>
+    {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
+  </div>
+</div>
+
+{% endblock content %}
